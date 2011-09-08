@@ -7,22 +7,23 @@ Clustering is only recommended for server administrators faced with high server 
 
 Service Schemas
 ###############
-SWG:ANH employs a very simple clustering schema. There are 3 main Service Schemas that make up a cluster:
+SWG:ANH employs a very simple clustering schema. A Service Schema is a collection of Services which run together on a single executable. There are 3 main Service Schemas that make up a cluster:
 
 Login
 -----
-(1 per-cluster(s))
-One Login Service Schema is required per-cluster, but one can span between multiple galaxies.
+* Scale: 1 per-Cluster
+One Login Service Schema is required per-cluster, but one can span between multiple galaxies. Its single task is to authenticate users and forward them to the correct Connection Service.
 
 Connection
 ----------
-(1+ per-cluster)
+* Scale: 1+ per-Cluster
 The sole purpous a Connection service is to process incoming messages from clients (after login), convert it to simulation data and route it to the correct service. Although that may seem like a small list of tasks, these tasks make up the majority of the intensive processing that is required.
 
 Simulation
 ----------
-(1 per-cluster)
-This is where "the game" is actually ran. All the planets, their contents and the simulation features are run on this Service Schema.
+* Scale: 1-per Cluster
+This is where "the game" is actually ran. All the services which affect gameplay reside in this Service Schema.
 
 Configuring
 ###########
+By default, the server is configured to start all Service Schemas on a single executable.
