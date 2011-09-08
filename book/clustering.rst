@@ -5,14 +5,14 @@ clustering is employed to split up tasks between two or more physical machines. 
 
 Clustering is only recommended for server administrators faced with high server populations (4 digit number). The goal is to take the most resource intensive tasks and split them off from the main simulation to allow for scaling.
 
-Service Schemas
+Servers
 ###############
-SWG:ANH employs a very simple clustering schema. A Service Schema is a collection of Services which run together on a single executable. There are 3 main Service Schemas that make up a cluster:
+SWG:ANH employs a very simple clustering schema. Each server mode is a collection of Services which run together on a single executable. There are 3 server types.
 
 Login
 -----
 * Scale: 1 per-Cluster
-One Login Service Schema is required per-cluster, but one can span between multiple galaxies. Its single task is to authenticate users and forward them to the correct Connection Service.
+One Login Server is required per-cluster, but one can span between multiple galaxies. Its single task is to authenticate users and forward them to the correct Connection Service.
 
 Connection
 ----------
@@ -21,9 +21,9 @@ The sole purpous a Connection service is to process incoming messages from clien
 
 Simulation
 ----------
-* Scale: 1-per Cluster
-This is where "the game" is actually ran. All the services which affect gameplay reside in this Service Schema.
+* Scale: 1 per-Cluster
+This is where "the game" is actually ran. All the services which affect gameplay reside in this configuration.
 
 Configuring
 ###########
-By default, the server is configured to start all Service Schemas on a single executable.
+By default, the server is configured to start all modes on a single executable.
